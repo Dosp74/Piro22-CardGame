@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pirogrammer Card Game</title>
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <h1>Pirogrammer Card Game</h1>
+        </div>
+        <div class="header-right">
+            <nav>
+                <ul>
+                    <li><a href="#">nav1</a></li>
+                    <li><a href="#">nav2</a></li>
+                    <li><a href="#">nav3</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        {% block content %}
+        <!-- 각자 만든 템플릿 -->
+        {% endblock %}
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 Pirogrammer Card Game. All rights reserved.</p>
+    </footer>
+</body>
+</html>
