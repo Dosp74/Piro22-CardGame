@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ user.username }}'s Game List</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Match</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in games_with_status %}
+    <tr>
+      <!-- 어떤 유저와 어떤 유저의 대결인지 -->
+      <td>
+        {{ item.game.attacker.username }} vs {{ item.game.defender.username }}
+      </td>
+
+      <!-- 게임의 상태 -->
+      <td>
+        {% if item.status == "waiting" %}
+          Waiting...
+          <form method="post" action="{% url 'game:cancel_game' item.game.id %}">
+            {% csrf_token %}
+            <button type="submit">Cancel Game</button>
+          </form>
+        {% elif item.status == "counterattack" %}
+          <form method="post" action="{% url 'game:counterattack' item.game.id %}">
+            {% csrf_token %}
+            <button type="submit">Counterattack!</button>
+          </form>
+        {% elif item.status == "finished" %}
+          {% if item.user_result == "DRAW" %}
+            Draw
+          {% elif item.user_result == "WIN" %}
+            Win
+          {% else %}
+            Lose
+          {% endif %}
+        {% endif %}
+      </td>
+
+      <!-- 게임 정보 버튼 -->
+      <td>
+        <a href="{% url 'game:game_detail' item.game.id %}">View Game</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

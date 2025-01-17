@@ -1,29 +1,28 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <main class="container">
-    <section class="header-section">
-        <div class="main_title">
-            <p>Piro Game</p>
-        </div>
-        <div class="user-info">
-            {% if user.is_authenticated %}
-                <div class="login-status">
-                    {{ user.username }} 님이 로그인 중
-                </div>
-            {% endif %}
-        </div>
-    </section>
-    <div class="bottom-buttons">
-        <form method="GET" action="{% url 'games:start' %}">
-            <button {% if not user.is_authenticated %}disabled{% endif %}>
-                start
-            </button>
-        </form>
-        <form method="GET" action="{% url 'games:list' %}">
-            <button {% if not user.is_authenticated %}disabled{% endif %}>
-                list
-            </button>
-        </form>
+  <section class="header-section">
+    <div class="main_title">
+      <p>Piro Game</p>
     </div>
+    <div class="user-info">
+      {% if user.is_authenticated %}
+        <div class="login-status">
+        {% if nickname %}
+          {{ nickname }} 님이 로그인 중
+        {% else %}
+          잘못된 사용자입니다
+        {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </section>
+  <div class="bottom-buttons">
+    <form method="GET" action="{% url 'game:start_game' %}">
+      <button {% if not user.is_authenticated %}disabled{% endif %}>start</button>
+    </form>
+    <form method="GET" action="{% url 'game:list' %}">
+      <button {% if not user.is_authenticated %}disabled{% endif %}>list</button>
+    </form>
+  </div>
 </main>
 {% endblock %}

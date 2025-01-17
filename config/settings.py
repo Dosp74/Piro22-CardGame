@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'ranking',
     'user',
     'django.contrib.sites',
-
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -156,20 +155,22 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SITE_ID = 1
 
 SOCIALACCOUNT_LOGIN_ON_GET = True
-LOGIN_REDIRECT_URL = 'login/intro2'
-ACCOUNT_LOGOUT_REDIRECT_URL = 'login/intro1'
-ACCOUNT_LOGOUT_ON_GET = True
+LOGIN_REDIRECT_URL = 'main'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'index'
+ACCOUNT_LOGOUT_ON_GET = True 
 
-ACCOUNT_ADAPTER = 'user.adapter.CustomSocialAccountAdapter'  # 'user'는 앱 이름
 
 SOCIALACCOUNT_PROVIDERS = {
     'kakao': {
         'APP': {
-            'client_id': '4bf5f30b50f5422d1e661116c70ee710',
-        },
-        'AUTH_PARAMS': {
-            'scope': 'profile_nickname',  # 프로필 닉네임과 이미지 요청
-        },
-        'USER_FIELDS': ['nickname'],  # 닉네임과 프로필 이미지 사용
+            'client_id': '4bf5f30b50f5422d1e661116c70ee710' ,
+            'secret': 'Sbaez4r0PxAdPJB5gQOwj9YDuo4MhoJT',  # 클라이언트 비밀키 추가
+        }
     }
 }
+
+KAKAO_REDIRECT_URI = 'http://127.0.0.1:8000/accounts/kakao/login/callback/'
+KAKAO_CLIENT_SECRET = 'Sbaez4r0PxAdPJB5gQOwj9YDuo4MhoJT' # 발급받은 client_secret을 여기에 입력
+KAKAO_CLIENT_ID = '4bf5f30b50f5422d1e661116c70ee710'  # 발급받은 client_id를 여기에 입력
+
+ACCOUNT_ADAPTER = 'user.adapter.CustomSocialAccountAdapter'  # user는 앱 이름

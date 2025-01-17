@@ -23,7 +23,7 @@ urlpatterns = [
     path('', include('user.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('game/', include('game.urls')),
+    path('game/', include('game.urls', namespace='game')),
     path('ranking/', include('ranking.urls')),
 ]
 

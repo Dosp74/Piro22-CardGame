@@ -1,34 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Piro Game</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1>Pirogrammer Card Game</h1>
-        <nav>
-            <a href="{% url 'users:login' %}">로그인</a>
-            <a href="{% url 'users:signup' %}">회원가입</a>
-        </nav>
+      <h1>Pirogrammer Card Game</h1>
+      <nav>
+        <a href="{% url 'user:login' %}">로그인</a>
+        <a href="{% url 'user:signup' %}">회원가입</a>
+      </nav>
     </header>
 
     <main class="container">
-        <div class="main_title">
-            <p>Piro Game</p>
-        </div>
-        <form method="GET" action="{% url 'games:start' %}">
-            <button 
-                aria-label="게임 시작"
-                {% if not user.is_authenticated %}disabled{% endif %}>
-                start
-            </button>
-        </form>
+      <div class="main_title">
+        <p>Piro Game</p>
+      </div>
+      <form method="GET" action="{% url 'game:start_game' %}">
+        <button aria-label="게임 시작" {% if not user.is_authenticated %}disabled{% endif %}>start</button>
+      </form>
     </main>
 
     <footer>
-        <p>피로그래밍 22기 카드게임 세션 1조</p>
+      <p>피로그래밍 22기 카드게임 세션 1조</p>
     </footer>
-</body>
+  </body>
 </html>
