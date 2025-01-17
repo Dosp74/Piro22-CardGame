@@ -9,4 +9,6 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('signup/', views.signup_view, name='signup'),
     path('list',views.user_list,name = 'user_list'),
+    path('accounts/kakao/login/', views.kakao_login, name='kakao_login'),  # 카카오 로그인 요청
+    path('accounts/kakao/login/callback/', views.kakao_callback, name='kakao_callback'),  # 카카오 리디렉션 후 처리
 ]

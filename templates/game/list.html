@@ -30,6 +30,7 @@
         {% elif item.status == "counterattack" %}
           <a href="{% url 'game:counterattack' item.game.id %}">Counterattack!</a>
         {% elif item.status == "finished" %}
+          {{item.user_result }}
           {% if item.user_result == "DRAW" %}
             Draw
           {% elif item.user_result == "WIN" %}
