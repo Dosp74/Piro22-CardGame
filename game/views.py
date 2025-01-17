@@ -2,7 +2,7 @@ import random
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Game
-#from account.models import Account
+#from user.models import User
 
 def start_game(request):
     def generate_random_cards():
@@ -74,3 +74,17 @@ def counterattack(request, game_id):
         game.determine_result()  # 게임 결과 결정
         
         return redirect('game:game_detail', game_id=game_id)
+    
+def update_point(request, game_id):
+    game = get_object_or_404(Game, id=game_id)
+    
+    if game.result == "ATTACKER_WIN":
+        game.attacker.point += game.attacker_card
+        game.defender.point -= game.attacker_card
+    elif game.result == "DEFENDER_WIN":
+        game.defender.point += game.defender_card
+        game.attacker.point -= game.defender_card
+    game.attacker.save()
+    game.defender.save()
+    
+    return redirect('game:game_detail', game_id=game_id)
