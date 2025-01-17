@@ -9,11 +9,19 @@
   {% csrf_token %}
   <button type="submit">게임취소</button>
 </form>
+<form method="post" action="{% url 'user_list' %}">
+  {% csrf_token %}
+  <button type="submit">전적목록</button>
+</form>
 
 {% elif status == 'counterattack' %}
 <form method="post" action="{% url 'counterattack' game.id %}">
   {% csrf_token %}
   <button type="submit">대응하기</button>
+</form>
+<form method="post" action="{% url 'user_list' %}">
+  {% csrf_token %}
+  <button type="submit">전적목록</button>
 </form>
 
 {% elif status == 'finished' %}
@@ -23,5 +31,8 @@
 <h4>결과:{{ game.get_result_for_user(request.user) }}</h4>
 <h4>점수:</h4>
 <!-- 결과 로직 세분화 필요 -->
+<form method="post" action="{% url 'user_list' %}">
+  {% csrf_token %}
+  <button type="submit">전적목록</button>
+</form>
 {% endif %} {% endblock %}
-<!-- 전체목록 버튼 구현 필요 -->
