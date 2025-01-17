@@ -1,0 +1,61 @@
+/* 전체 폼 스타일 */
+form {
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 제목 스타일 */
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* 카드 선택 라디오 버튼과 레이블 스타일 */
+div {
+  margin-bottom: 20px;
+}
+
+input[type="radio"] {
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+label {
+  font-size: 16px;
+  font-family: var(--secondary-font);
+  color: #333;
+  cursor: pointer;
+  padding: 5px;
+}
+
+/* 라디오 버튼 선택시 레이블 강조 */
+input[type="radio"]:checked + label {
+  font-weight: bold;
+  color: #007bff;
+}
+
+/* 버튼 스타일 */
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}

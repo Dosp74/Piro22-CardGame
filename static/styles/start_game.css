@@ -1,0 +1,77 @@
+.start {
+  display: flex;
+  justify-content: center;
+}
+
+.button_submit {
+  margin: 20px;
+
+  font-size: 35px;
+  font-weight: bold;
+
+  width: 220px;
+  border: 2px solid #b9d8eb;
+  background-color: #b9d8eb;
+  border-radius: 5px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.button_submit:hover {
+  border: 2px solid #77bbe6;
+  background-color: #77bbe6;
+}
+
+.card_number {
+  text-align: left;
+}
+
+/* Select box 스타일 */
+.select-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 200px;
+  margin: 10px 0;
+}
+
+.select-wrapper select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  font-family: var(--secondary-font);
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* 드롭다운 화살표 스타일 */
+.select-wrapper::after {
+  content: "▼";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #333;
+  pointer-events: none;
+}
+
+.select-wrapper select:hover {
+  border-color: #666;
+}
+
+.select-wrapper select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.select-wrapper option {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #f8f8f8;
+}
