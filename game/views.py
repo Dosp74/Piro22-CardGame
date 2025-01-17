@@ -127,16 +127,35 @@ def update_point(request, game_id):
 from django.shortcuts import render
 from .models import Game
 
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from .models import Game
+
+@login_required
 def list_view(request):
-    games = Game.objects.filter(attacker=request.user) | Game.objects.filter(defender=request.user)
-    
-    games_with_results = []
-    for game in games:
-        result = game.get_result_for_user(request.user)  # 결과 계산
-        games_with_results.append({
-            "game": game,
-            "result": result
-        })
-    
-    context = {"games_with_results": games_with_results}
+    user = request.user  # 현재 로그인한 사용자
+
+    # 사용자가 참여한 모든 게임 가져오기
+    games_as_attacker = Game.objects.filter(attacker=user)
+    games_as_defender = Game.objects.filter(defender=user)
+    all_games = games_as_attacker | games_as_defender
+
+    # 게임과 상태를 저장
+    games_with_status = []
+    for game in all_games:
+        if game.result == "":  # 결과가 없는 경우
+            if user == game.attacker and not game.defender_card:
+                status = "waiting"  # 방어자가 아직 응답하지 않은 상태
+            elif user == game.defender and not game.defender_card:
+                status = "counterattack"  # 방어자가 반격해야 하는 상태
+        else:
+            status = "finished"  # 게임이 종료된 상태
+
+        games_with_status.append({"game": game, "status": status})
+
+    # 템플릿 렌더링
+    context = {
+        "user": user,
+        "games_with_status": games_with_status,
+    }
     return render(request, "game/list.html", context)
