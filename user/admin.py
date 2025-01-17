@@ -9,4 +9,6 @@ class UserAdmin(BaseUserAdmin):
         (None, {'fields': ('point',)}),  # 추가 필드
     )
 
+    list_display = ('username', 'email', 'first_name', 'last_name', 'point', 'is_staff')  # 목록에서 표시할 필드
+
 admin.site.register(User, UserAdmin)
