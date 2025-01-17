@@ -169,4 +169,5 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-AUTH_USER_MODEL = 'user.User'
+
+KAKAO_CLIENT_ID = '4bf5f30b50f5422d1e661116c70ee710'  # 발급받은 client_id를 여기에 입력
