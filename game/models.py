@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 import random
 
 class Game(models.Model):
@@ -8,8 +9,16 @@ class Game(models.Model):
         ("LOW", "Lower number wins")
     ]
 
-    attacker = models.ForeignKey(User, related_name="games_attacked", on_delete=models.CASCADE)
-    defender = models.ForeignKey(User, related_name="games_defended", on_delete=models.CASCADE)
+    attacker = models.ForeignKey(
+        settings.AUTH_USER_MODEL,  # 사용자 정의 User 모델을 참조
+        related_name="games_attacked",
+        on_delete=models.CASCADE
+    )
+    defender = models.ForeignKey(
+        settings.AUTH_USER_MODEL,  # 사용자 정의 User 모델을 참조
+        related_name="games_defended",
+        on_delete=models.CASCADE
+    )
     attacker_card = models.PositiveIntegerField(null=True, blank=True)  # 공격자가 선택한 카드
     defender_card = models.PositiveIntegerField(null=True, blank=True)  # 방어자가 선택한 카드
     winning_condition = models.CharField(max_length=10, choices=WINNING_CONDITIONS, default="HIGH")  # 승리 조건

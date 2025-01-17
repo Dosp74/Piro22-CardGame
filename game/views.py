@@ -1,24 +1,54 @@
 import random
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Game
-#from user.models import User
-from django.shortcuts import render
+from django.http import HttpResponseBadRequest, HttpResponseNotAllowed
+from user.models import User  # User 모델 가져오기
+from game.models import Game  # Game 모델 가져오기
 
-def list(request):
-    # 데이터를 가져오거나 처리할 내용 작성
-    return render(request, 'game/list.html')  # 'list.html' 경로는 상황에 맞게 수정
 
 def start_game(request):
     def generate_random_cards():
-        #1~10 중 5개의 랜덤한 숫자를 반환
+        # 1~10 중 5개의 랜덤한 숫자를 반환
         return random.sample(range(1, 11), 5)
 
     if request.method == "GET":
-        # 5장의 랜덤 카드를 생성
-        cards = generate_random_cards() #5개의 카드 리스트
-        #users = Account.objects.exclude(id=request.user.id)  # 상대 유저 리스트
-        return render(request, "game/start_game.html", {"cards": cards})
+        # GET 요청 처리: 랜덤 카드와 사용자 목록 생성
+        context = {
+            "cards": generate_random_cards(),
+            "users": User.objects.exclude(id=request.user.id),  # 현재 사용자 제외
+        }
+        return render(request, "game/start_game.html", context)
+
+    elif request.method == "POST":
+        # POST 요청 처리
+        selected_card = request.POST.get("selected_card")  # `selected_card`에서 값 가져오기
+        defender_id = request.POST.get("defender_id")
+
+        if not selected_card or not defender_id:
+            return HttpResponseBadRequest("Invalid input. Please select a card and an opponent.")
+
+        # 데이터 타입 변환 및 유효성 검사
+        try:
+            attacker_card = int(selected_card)  # `selected_card`를 정수로 변환
+        except ValueError:
+            return HttpResponseBadRequest("Invalid card value.")
+
+        defender = get_object_or_404(User, id=defender_id)
+
+        # 새로운 게임 생성
+        game = Game.objects.create(
+            attacker=request.user,
+            defender=defender,
+            attacker_card=attacker_card
+        )
+
+        # 결과 페이지로 리다이렉트
+        return redirect("game:list")
+
+    # 잘못된 HTTP 메서드 처리
+    return HttpResponseNotAllowed(["GET", "POST"])
+
+
 
 @login_required
 def game_detail(request, game_id):
@@ -93,3 +123,20 @@ def update_point(request, game_id):
     game.defender.save()
     
     return redirect('game:game_detail', game_id=game_id)
+
+from django.shortcuts import render
+from .models import Game
+
+def list_view(request):
+    games = Game.objects.filter(attacker=request.user) | Game.objects.filter(defender=request.user)
+    
+    games_with_results = []
+    for game in games:
+        result = game.get_result_for_user(request.user)  # 결과 계산
+        games_with_results.append({
+            "game": game,
+            "result": result
+        })
+    
+    context = {"games_with_results": games_with_results}
+    return render(request, "game/list.html", context)

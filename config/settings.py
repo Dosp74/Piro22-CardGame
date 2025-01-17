@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'ranking',
     'user',
     'django.contrib.sites',
-
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
