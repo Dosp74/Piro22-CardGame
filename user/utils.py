@@ -28,15 +28,3 @@ def get_kakao_user_info(access_token):
     else:
         print(f"Failed to get user info: {response.json()}")
         return None
-    
-def kakao_logout(access_token):
-    logout_url = "https://kapi.kakao.com/v1/user/logout"
-    headers = {
-        "Authorization": f"Bearer {access_token}"
-    }
-    response = requests.post(logout_url, headers=headers)
-    if response.status_code == 200:
-        return response.json()
-    else:
-        print(f"Failed to logout: {response.json()}")
-        return None
