@@ -6,7 +6,7 @@ from django.urls import reverse  # reverse 함수 가져오기
 from .utils import get_kakao_access_token, get_kakao_user_info  # utils에서 함수 가져오기
 from user.models import User
 from django.contrib.auth import get_user_model
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 
 
 User = get_user_model()
@@ -72,11 +72,42 @@ def kakao_callback(request):
     # 6. 성공 시 리디렉트
     return redirect(reverse('user:intro2'))
 
+# def kakao_login(request):
+#     # 카카오 로그인 URL 생성
+#     client_id = settings.KAKAO_CLIENT_ID
+#     redirect_uri = settings.KAKAO_REDIRECT_URI
+#     kakao_auth_url = f"https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code"
+
+#     # 카카오 로그인 페이지로 리디렉션
+#     return redirect(kakao_auth_url)
+
 def kakao_login(request):
-    # 카카오 로그인 URL 생성
     client_id = settings.KAKAO_CLIENT_ID
     redirect_uri = settings.KAKAO_REDIRECT_URI
-    kakao_auth_url = f"https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code"
-
-    # 카카오 로그인 페이지로 리디렉션
+    kakao_auth_url = f"https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code&prompt=login"
     return redirect(kakao_auth_url)
+
+def kakao_logout(access_token):
+    logout_url = "https://kapi.kakao.com/v1/user/logout"
+    headers = {
+        "Authorization": f"Bearer {access_token}"
+    }
+    response = requests.post(logout_url, headers=headers)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Failed to logout: {response.json()}")
+        return None
+    
+def user_logout(request):
+    # 1. Django에서 사용자 로그아웃
+    logout(request)
+
+    # 2. 카카오 로그아웃 API 호출 (옵션)
+    access_token = request.session.get('kakao_access_token')
+    if access_token:
+        kakao_logout(access_token)
+        request.session.pop('kakao_access_token', None)
+
+    # 3. 홈 또는 로그인 페이지로 리디렉트
+    return redirect(reverse('user:login'))
