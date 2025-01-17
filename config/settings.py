@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'ranking',
     'user',
     'django.contrib.sites',
-
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -169,3 +168,5 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+AUTH_USER_MODEL = 'user.User'
