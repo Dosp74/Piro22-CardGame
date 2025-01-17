@@ -174,3 +174,5 @@ KAKAO_CLIENT_SECRET = 'Sbaez4r0PxAdPJB5gQOwj9YDuo4MhoJT' # 발급받은 client_s
 KAKAO_CLIENT_ID = '4bf5f30b50f5422d1e661116c70ee710'  # 발급받은 client_id를 여기에 입력
 
 ACCOUNT_ADAPTER = 'user.adapter.CustomSocialAccountAdapter'  # user는 앱 이름
+
+AUTH_USER_MODEL = 'user.User'  # user는 앱 이름

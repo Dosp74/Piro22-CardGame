@@ -9,4 +9,4 @@ class UserAdmin(BaseUserAdmin):
         (None, {'fields': ('point',)}),  # 추가 필드
     )
 
-admin.site.register(User, UserAdmin) 
+admin.site.register(User, UserAdmin)

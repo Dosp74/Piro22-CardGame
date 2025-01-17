@@ -20,7 +20,7 @@
     <form method="GET" action="{% url 'game:start_game' %}">
       <button {% if not user.is_authenticated %}disabled{% endif %}>start</button>
     </form>
-    <form method="GET" action="{% url 'game:list' %}">
+    <form method="GET" action="{% url 'game:list_view' %}">
       <button {% if not user.is_authenticated %}disabled{% endif %}>list</button>
     </form>
   </div>
