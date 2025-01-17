@@ -2,7 +2,7 @@ import random
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Game
-#from account.models import Account
+#from user.models import User
 
 def start_game(request):
     def generate_random_cards():
