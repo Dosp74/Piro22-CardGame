@@ -3,6 +3,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Game
 #from user.models import User
+from django.shortcuts import render
+
+def list(request):
+    # 데이터를 가져오거나 처리할 내용 작성
+    return render(request, 'game/list.html')  # 'list.html' 경로는 상황에 맞게 수정
 
 def start_game(request):
     def generate_random_cards():
