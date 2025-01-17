@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% block content %}
+<h1>
+  {{ game.id }} - {{ game.attacker.username }}VS{{ game.defender.username }}
+</h1>
+
+{% if status == 'waiting' %}
+<p>진행중...</p>
+<form method="post" action="{% url 'cancel_game' game.id %}">
+  {% csrf_token %}
+  <button type="submit">게임취소</button>
+</form>
+
+{% elif status == 'counterattack' %}
+<form method="post" action="{% url 'counterattack' game.id %}">
+  {% csrf_token %}
+  <button type="submit">대응하기</button>
+</form>
+
+{% elif status == 'finished' %}
+<p>{{ game.get_winning_condition_display }}</p>
+<p>{{ game.attacker.username }}:{{ game.attacker_card }}</p>
+<p>{{ game.defender.username }}:{{ game.defender_card }}</p>
+<h4>결과:{{ game.get_result_for_user(request.user) }}</h4>
+<h4>점수:</h4>
+<!-- 결과 로직 세분화 필요 -->
+{% endif %} {% endblock %}
+<!-- 전체목록 버튼 구현 필요 -->
