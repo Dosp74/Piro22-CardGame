@@ -24,7 +24,7 @@ button {
 
 body {
   font-family: var(--main-font);
-  background-image: url("./background_img.png");
+  background-image: url("{% static 'img/background_img.png' %}");
   background-size: cover;
   background-position: center -135px;
   background-repeat: no-repeat;
@@ -35,8 +35,7 @@ body {
   flex-direction: column;
 }
 
-.header-right,
-.main_comment {
+.header_right {
   font-family: var(--secondary-font);
 }
 
@@ -53,31 +52,29 @@ body {
   color: white;
 }
 
-.header-left {
+.header_left {
   font-size: 30px;
   margin-left: 40px;
   padding: 10px;
 }
 
-.header-left > a {
+.header_left > a {
   color: white;
 }
 
-.header-right {
+.header_right {
   display: flex;
   flex-direction: row;
   font-size: 20px;
 }
 
 .header_login,
-.header_signup,
-.header_logout {
+.header_signup {
   margin-right: 50px;
 }
 
 .header_login > a,
-.header_signup > a,
-.header_logout > a {
+.header_signup > a {
   color: white;
 }
 
@@ -126,26 +123,8 @@ footer {
   font-weight: bolder;
 }
 
-.main_comment {
-  padding-top: 30px;
-  font-size: 18px;
-}
-
-.bold {
-  font-weight: bold;
-}
-
-.main_start,
-.main_list {
+.main_start {
   font-size: 30px;
   font-weight: bold;
-
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.main_button {
-  display: flex;
-  flex-direction: row;
   padding-bottom: 20px;
 }
