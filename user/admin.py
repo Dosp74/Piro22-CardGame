@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from allauth.socialaccount.models import SocialAccount, SocialApp, SocialToken
 from .models import User
 
 class UserAdmin(BaseUserAdmin):
@@ -8,4 +9,4 @@ class UserAdmin(BaseUserAdmin):
         (None, {'fields': ('point',)}),  # 추가 필드
     )
 
-admin.site.register(User, UserAdmin) 
+admin.site.register(User, UserAdmin)

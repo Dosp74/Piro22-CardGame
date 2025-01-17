@@ -1,6 +1,13 @@
 import requests
 from django.shortcuts import render, redirect
 from django.conf import settings
+from allauth.socialaccount.models import SocialAccount
+from django.contrib.auth import get_user_model
+from django.urls import reverse  # reverse 함수 가져오기
+from .utils import get_kakao_access_token, get_kakao_user_info  # utils에서 함수 가져오기
+
+
+User = get_user_model()
 
 def intro1_view(request):
     return render(request, 'login/intro1.html')
@@ -17,44 +24,43 @@ def login_view(request):
 def user_list(request):
     return render(request, 'main/list.html')
 
-from django.shortcuts import render
-from allauth.socialaccount.models import SocialAccount
+User = get_user_model()
 
 def kakao_callback(request):
-    # 카카오 로그인 후 리디렉션된 URL에서 인증 코드 받기
+    """카카오 로그인 콜백 처리"""
+    # 1. 인증 코드 가져오기
     code = request.GET.get('code')
-    client_id = settings.KAKAO_CLIENT_ID  # 카카오에서 발급받은 REST API 키
-    redirect_uri = 'http://127.0.0.1:8000/accounts/kakao/login/callback/'
+    if not code:
+        return render(request, 'error.html', {'message': 'Authorization code not provided.'})
 
-    # 카카오로부터 액세스 토큰을 받는 요청
-    token_url = "https://kauth.kakao.com/oauth/token"
-    data = {
-        'grant_type': 'authorization_code',
-        'client_id': client_id,
-        'redirect_uri': redirect_uri,
-        'code': code,
-    }
-    
-    response = requests.post(token_url, data=data)
-    access_token = response.json().get('access_token')
+    # 2. Access Token 요청
+    access_token = get_kakao_access_token(code)
+    if not access_token:
+        return render(request, 'error.html', {'message': 'Failed to get access token.'})
 
-    # 액세스 토큰을 사용하여 카카오 사용자 정보 요청
-    user_info_url = "https://kapi.kakao.com/v2/user/me"
-    headers = {'Authorization': f'Bearer {access_token}'}
-    user_info_response = requests.get(user_info_url, headers=headers)
-    user_info = user_info_response.json()
+    # 3. 사용자 정보 요청
+    user_info = get_kakao_user_info(access_token)
+    if not user_info:
+        return render(request, 'error.html', {'message': 'Failed to get user info.'})
 
-    # 사용자 정보에서 nickname 추출
-    nickname = user_info.get('properties', {}).get('nickname')
+    # 4. 사용자 정보에서 ID, 닉네임, 프로필 사진 추출
+    kakao_id = user_info.get('id')
+    nickname = user_info.get('properties', {}).get('nickname', 'Unknown')
+    profile_image = user_info.get('properties', {}).get('profile_image', None)
 
-    # 추출한 nickname을 템플릿에 전달
-    return render(request, 'login/intro2.html', {'nickname': nickname})
+    # 5. 사용자 계정 생성 또는 업데이트
+    user, created = User.objects.get_or_create(username=kakao_id)
+    user.first_name = nickname
+    user.profile_image = profile_image
+    user.save()
 
+    # 6. 성공 시 리디렉트
+    return redirect(reverse('user:intro2'))
 
 def kakao_login(request):
     # 카카오 로그인 URL 생성
     client_id = settings.KAKAO_CLIENT_ID
-    redirect_uri = 'http://127.0.0.1:8000/accounts/kakao/login/callback/'
+    redirect_uri = settings.KAKAO_REDIRECT_URI
     kakao_auth_url = f"https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code"
 
     # 카카오 로그인 페이지로 리디렉션

@@ -6,7 +6,13 @@
     </div>
     <div class="user-info">
       {% if user.is_authenticated %}
-      <div class="login-status">{% if nickname %} {{ nickname }} 님이 로그인 중 {% else %} {{ user.username }} 님이 로그인 중 {% endif %}</div>
+        <div class="login-status">
+        {% if nickname %}
+          {{ nickname }} 님이 로그인 중
+        {% else %}
+          잘못된 사용자입니다
+        {% endif %}
+        </div>
       {% endif %}
     </div>
   </section>
@@ -14,7 +20,7 @@
     <form method="GET" action="{% url 'game:start_game' %}">
       <button {% if not user.is_authenticated %}disabled{% endif %}>start</button>
     </form>
-    <form method="GET" action="{% url 'game:list' %}">
+    <form method="GET" action="{% url 'game:list_view' %}">
       <button {% if not user.is_authenticated %}disabled{% endif %}>list</button>
     </form>
   </div>
