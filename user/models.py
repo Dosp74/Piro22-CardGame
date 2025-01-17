@@ -1,4 +1,5 @@
 # user/models.py
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 class User(models.Model):
@@ -7,3 +8,7 @@ class User(models.Model):
 
     def __str__(self):
         return f"{self.username} ({self.point} points)"
+
+class CustomUser(AbstractUser):
+    nickname = models.CharField(max_length=20, blank=True, null=True)  # 닉네임
+    profile_image = models.URLField(blank=True, null=True)  # 프로필 사진 (추가 가능)

@@ -156,46 +156,20 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SITE_ID = 1
 
 SOCIALACCOUNT_LOGIN_ON_GET = True
-ACCOUNT_SIGNUP_REDIRECT_URL = '/'
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'login/intro2'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'login/intro1'
 ACCOUNT_LOGOUT_ON_GET = True
-SOCIALACCOUNT_AUTO_SIGNUP = True # 자동 계정 생성 활성화
 
-# Redirect URLs
-ACCOUNT_SIGNUP_REDIRECT_URL = '/login/intro2'
-LOGIN_REDIRECT_URL = '/login/intro1'
-LOGOUT_REDIRECT_URL = '/login/login'
+ACCOUNT_ADAPTER = 'user.adapter.CustomSocialAccountAdapter'  # 'user'는 앱 이름
 
-# Allauth Custom Adapter
-ACCOUNT_ADAPTER = 'accounts.adapter.CustomAccountAdapter'
-
-# Kakao Login Settings
 SOCIALACCOUNT_PROVIDERS = {
     'kakao': {
         'APP': {
             'client_id': '4bf5f30b50f5422d1e661116c70ee710',
-            'secret': 'Sbaez4r0PxAdPJB5gQOwj9YDuo4MhoJT',
-            'key': ''
         },
         'AUTH_PARAMS': {
-            'scope': 'profile_nickname account_email'
+            'scope': 'profile_nickname',  # 프로필 닉네임과 이미지 요청
         },
-        'METHOD': 'oauth2',
-        'USER_FIELDS': ['email', 'nickname'],
+        'USER_FIELDS': ['nickname'],  # 닉네임과 프로필 이미지 사용
     }
-}
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'root': {
-        'handlers': ['console'],
-        'level': 'DEBUG',
-    },
 }
