@@ -2,9 +2,11 @@ import requests
 from django.shortcuts import render, redirect
 from django.conf import settings
 from allauth.socialaccount.models import SocialAccount
-from django.contrib.auth import get_user_model
 from django.urls import reverse  # reverse 함수 가져오기
 from .utils import get_kakao_access_token, get_kakao_user_info  # utils에서 함수 가져오기
+from user.models import User
+from django.contrib.auth import get_user_model
+from django.contrib.auth import login
 
 
 User = get_user_model()
@@ -13,7 +15,17 @@ def intro1_view(request):
     return render(request, 'login/intro1.html')
 
 def intro2_view(request):
-    return render(request, 'login/intro2.html')
+    # 현재 로그인된 사용자의 username 가져오기
+    if request.user.is_authenticated:
+        username = request.user.username  # 현재 로그인된 사용자의 username
+    else:
+        username = None  # 로그인되지 않은 경우
+
+    context = {
+        'username': username
+    }
+
+    return render(request, 'login/intro2.html', context)
 
 def signup_view(request):
     return render(request, 'login/signup.html')
@@ -49,10 +61,13 @@ def kakao_callback(request):
     profile_image = user_info.get('properties', {}).get('profile_image', None)
 
     # 5. 사용자 계정 생성 또는 업데이트
-    user, created = User.objects.get_or_create(username=kakao_id)
+    user, created = User.objects.get_or_create(username=nickname)
     user.first_name = nickname
     user.profile_image = profile_image
     user.save()
+
+    user.backend = 'allauth.account.auth_backends.AuthenticationBackend'
+    login(request, user)
 
     # 6. 성공 시 리디렉트
     return redirect(reverse('user:intro2'))
