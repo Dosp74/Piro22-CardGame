@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% comment %} {% static "ranking.css" %} {% endcomment %}
+
+{% block content %}
+    <main class="ranking">
+        <h2>Piro 명예의 전당</h2>
+        <hr/>
+        <h3>user2</h3>
+        <p>점수: 11</p>
+        {% comment %}
+        <h3> {{ accounts.0.user_name }} </h3>
+        <h3> {{ accounts.0.score}} </h3> 
+        {% endcomment %}
+        <div class="first">
+            1
+        </div>
+        <h3>user1</h3>
+        <p>점수: -1</p>
+        {% comment %}
+        <h3> {{ accounts.1.user_name }} </h3>
+        <h3> {{ accounts.1.score}} </h3>
+        {% endcomment %}
+        <div class="second">
+            2
+        </div>
+        <h3>user4</h3>
+        <p>점수: -6</p>
+        {% comment %}
+        <h3> {{ accounts.2.user_name }} </h3>
+        <h3> {{ accounts.2.score}} </h3>
+        {% endcomment %}
+        <div class="third">
+            3
+        </div>
+        {% comment %} href = "list 페이지" {% endcomment %}
+        <a>전적 목록</a>
+    </main>
+
+{% endblock %}
