@@ -1,0 +1,76 @@
+/* 게임 상세 페이지 스타일 */
+h1 {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* 게임 진행 상태 표시 */
+p {
+  font-size: 18px;
+  color: #555;
+  text-align: center;
+  margin: 10px 0;
+}
+
+/* 버튼 스타일 */
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #d3d3d3;
+  cursor: not-allowed;
+}
+
+/* 게임 결과 영역 스타일 */
+h4 {
+  font-size: 20px;
+  font-weight: normal;
+  color: #333;
+  margin-top: 15px;
+  text-align: center;
+}
+
+/* 결과 세부 정보 (카드 및 점수) */
+p:nth-of-type(2),
+p:nth-of-type(3) {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+/* 전적목록 버튼 */
+form {
+  display: flex;
+  justify-content: center;
+}
+
+form button {
+  width: auto;
+  padding: 10px 20px;
+  margin-top: 20px;
+  background-color: #28a745;
+  color: white;
+}
+
+form button:hover {
+  background-color: #218838;
+}

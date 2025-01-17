@@ -1,0 +1,52 @@
+:root {
+  --main-font: "Chakra Petch", sans-serif; /* 영어 */
+  --secondary-font: "IBM Plex Sans KR", Arial, sans-serif; /* 한국어 */
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+button {
+  all: unset;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+body {
+  font-family: var(--main-font);
+  background-image: url("./background_img.png");
+  background-size: cover;
+  background-position: center -135px;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.login_text {
+  font-size: 32px;
+  font-weight: bolder;
+  font-family: var(--secondary-font);
+
+  padding-left: 30px;
+  padding-top: 30px;
+  padding-bottom: 15px;
+}
+
+.kakao_login {
+  display: flex;
+
+  padding-left: 30px;
+}

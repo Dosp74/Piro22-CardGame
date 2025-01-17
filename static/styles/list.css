@@ -1,0 +1,97 @@
+/* 리스트 테이블 스타일 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+th,
+td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f4f4f4;
+  color: #333;
+  font-size: 16px;
+}
+
+td {
+  background-color: #fff;
+}
+
+tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* 게임 리스트 제목 */
+h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+/* 게임 상태 및 버튼 스타일 */
+td form button,
+td a {
+  font-size: 14px;
+  padding: 8px 12px;
+  background-color: #6dbbeb;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+}
+
+td form button:hover,
+td a:hover {
+  background-color: #36a5ea;
+}
+
+/* "Cancel Game" 버튼의 색상 */
+td form button {
+  background-color: #dc3545;
+  margin-top: 10px;
+}
+
+td form button:hover {
+  background-color: #c82333;
+}
+
+/* 테이블 바디 배경 색상 */
+.body_box {
+  width: 80%;
+  max-width: 900px;
+  margin: 20px auto;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 게임 리스트 헤더 스타일 */
+.game-list-header {
+  text-align: center;
+}
+
+.game-list-header h2 {
+  font-size: 28px;
+  font-weight: bolder;
+  color: #333;
+}
+
+.game_list_all {
+  display: flex;
+  flex-direction: column;
+}
+
+.body_box {
+  display: flex;
+  width: 550px;
+}
