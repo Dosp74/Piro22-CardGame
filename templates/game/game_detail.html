@@ -26,13 +26,13 @@
 
 {% elif status == 'finished' %}
 <p>{{ game.get_winning_condition_display }}</p>
-<p>{{ game.attacker.username }}:{{ game.attacker_card }}</p>
-<p>{{ game.defender.username }}:{{ game.defender_card }}</p>
-<h4>결과:{{ user_result }}</h4>
-<h4>점수:</h4>
-<!-- 결과 로직 세분화 필요 -->
+<p>{{ game.attacker.username }}: {{ game.attacker_card }}</p>
+<p>{{ game.defender.username }}: {{ game.defender_card }}</p>
+<h4>결과: {{ user_result }}</h4>
+<h4>점수: {{ point_change }}</h4>
 <form method="post" action="{% url 'game:list_view' %}">
   {% csrf_token %}
   <button type="submit">전적목록</button>
 </form>
-{% endif %} {% endblock %}
+{% endif %}
+{% endblock %}

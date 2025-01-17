@@ -52,26 +52,38 @@ def start_game(request):
 
 @login_required
 def game_detail(request, game_id):
-    # 게임 정보 가져오기
     game = get_object_or_404(Game, id=game_id)
-    
-    # 로그인한 사용자의 관점에서 게임 상태 확인
+
+    # 게임 상태 확인
     if game.result == "":
         if request.user == game.attacker:
-            status = "waiting"  # 진행 중 (4-1 상황)
+            status = "waiting"
         elif request.user == game.defender:
-            status = "counterattack"  # 반격 가능 (4-2 상황)
+            status = "counterattack"
     else:
-        status = "finished"  # 종료 (4-3 상황)
+        status = "finished"
 
-    # 사용자의 게임 결과 가져오기
+    # 사용자의 게임 결과
     user_result = game.get_result_for_user(request.user) if game.result else None
 
-    # 컨텍스트에 데이터 추가
+    # 점수 변화 계산
+    point_change = 0
+    if status == "finished":
+        if game.result == "ATTACKER_WIN":
+            point_change = game.attacker_card if request.user == game.attacker else -game.defender_card
+        elif game.result == "DEFENDER_WIN":
+            point_change = game.defender_card if request.user == game.defender else -game.attacker_card
+        elif game.result == "DRAW":
+            point_change = 0
+
+    # game.update_points()
+
+    # 템플릿에 전달할 데이터
     context = {
         "game": game,
         "status": status,
-        "user_result": user_result,  # 사용자의 게임 결과
+        "user_result": user_result,
+        "point_change": point_change,  # 점수 변화 추가
     }
 
     return render(request, "game/game_detail.html", context)
@@ -131,6 +143,7 @@ def counterattack(request, game_id):
 
         game.save()
         game.determine_result()  # 게임 결과 결정
+        game.update_points()
 
         print(f"Game updated: {game}")
         return redirect('game:game_detail', game_id=game_id)
