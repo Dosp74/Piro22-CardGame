@@ -11,7 +11,7 @@
     </div>
   </section>
   <div class="bottom-buttons">
-    <form method="GET" action="{% url 'game:start' %}">
+    <form method="GET" action="{% url 'game:start_game' %}">
       <button {% if not user.is_authenticated %}disabled{% endif %}>start</button>
     </form>
     <form method="GET" action="{% url 'game:list' %}">
