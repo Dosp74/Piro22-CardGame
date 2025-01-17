@@ -43,7 +43,7 @@ def start_game(request):
         )
 
         # 결과 페이지로 리다이렉트
-        return redirect("game:list")
+        return redirect("game:list_view")
 
     # 잘못된 HTTP 메서드 처리
     return HttpResponseNotAllowed(["GET", "POST"])
@@ -58,11 +58,21 @@ def game_detail(request, game_id):
     # 로그인한 사용자의 관점에서 게임 상태 확인
     if game.result == "":
         if request.user == game.attacker:
-            context = {"game": game, "status": "waiting"}  # 진행 중 (4-1 상황)
+            status = "waiting"  # 진행 중 (4-1 상황)
         elif request.user == game.defender:
-            context = {"game": game, "status": "counterattack"}  # 반격 가능 (4-2 상황)
+            status = "counterattack"  # 반격 가능 (4-2 상황)
     else:
-        context = {"game": game, "status": "finished"}  # 종료 (4-3 상황)
+        status = "finished"  # 종료 (4-3 상황)
+
+    # 사용자의 게임 결과 가져오기
+    user_result = game.get_result_for_user(request.user) if game.result else None
+
+    # 컨텍스트에 데이터 추가
+    context = {
+        "game": game,
+        "status": status,
+        "user_result": user_result,  # 사용자의 게임 결과
+    }
 
     return render(request, "game/game_detail.html", context)
 
@@ -73,42 +83,60 @@ def cancel_game(request, game_id):
     # 게임을 취소할 수 있는 상태인지 확인
     if request.user == game.attacker and game.defender_card is None:
         game.delete()
-        return redirect('game_list')  # 게임 목록 페이지 구현 필요
+        return redirect('game:list_view')  # 게임 목록 페이지 구현 필요
     else:
         return redirect('game:game_detail', game_id=game_id) # templates/game/game_detail.html로 리다이렉트
 
 @login_required
 def counterattack(request, game_id):
     game = get_object_or_404(Game, id=game_id)
-    
-    if request.method == "GET": # 반격하는 페이지 표시
+
+    if request.method == "GET":  # 반격 페이지 표시
+        print(f"GET Request: User={request.user}, Game Defender={game.defender}, Defender Card={game.defender_card}")
+
         if request.user != game.defender or game.defender_card is not None:
+            print("Redirecting to game detail: Unauthorized access or card already set.")
             return redirect('game:game_detail', game_id=game_id)
-        
+
         # 5장의 랜덤 카드 생성
         cards = random.sample(range(1, 11), 5)
         return render(request, "game/counterattack.html", {
             "game": game,
             "cards": cards,
         })
-    
-    elif request.method == "POST": # 폼 제출 시
+
+    elif request.method == "POST":  # 폼 제출 처리
+        print(f"POST Request: User={request.user}, Game Defender={game.defender}, Defender Card={game.defender_card}")
+
         if request.user != game.defender or game.defender_card is not None:
+            print("Redirecting to game detail: Unauthorized access or card already set.")
             return redirect('game:game_detail', game_id=game_id)
-        
-        selected_card = int(request.POST.get('selected_card'))
-        
-        # 선택한 카드 저장
-        game.defender_card = selected_card
-        
-        # 승리 조건이 설정되어 있지 않다면 랜덤으로 설정
+
+        selected_card = request.POST.get('selected_card')
+        print(f"Selected card: {selected_card}")
+
+        if not selected_card:
+            print("No card selected. Redirecting to counterattack page.")
+            return redirect('game:counterattack', game_id=game_id)
+
+        try:
+            game.defender_card = int(selected_card)
+        except ValueError:
+            print(f"Invalid card value: {selected_card}. Redirecting to counterattack page.")
+            return redirect('game:counterattack', game_id=game_id)
+
+        # 승리 조건 설정
         if not game.winning_condition:
             game.winning_condition = random.choice([choice[0] for choice in Game.WINNING_CONDITIONS])
-        
+
         game.save()
         game.determine_result()  # 게임 결과 결정
-        
+
+        print(f"Game updated: {game}")
         return redirect('game:game_detail', game_id=game_id)
+
+    print("Invalid HTTP method. Only GET and POST are allowed.")
+    return redirect('game:game_detail', game_id=game_id)
     
 def update_point(request, game_id):
     game = get_object_or_404(Game, id=game_id)
@@ -151,7 +179,12 @@ def list_view(request):
         else:
             status = "finished"  # 게임이 종료된 상태
 
-        games_with_status.append({"game": game, "status": status})
+        user_result = game.get_result_for_user(user)
+        games_with_status.append({
+            "game": game,
+            "status": status,
+            "user_result": user_result
+        })
 
     # 템플릿 렌더링
     context = {
