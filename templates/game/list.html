@@ -28,11 +28,9 @@
             <button type="submit">Cancel Game</button>
           </form>
         {% elif item.status == "counterattack" %}
-          <form method="post" action="{% url 'game:counterattack' item.game.id %}">
-            {% csrf_token %}
-            <button type="submit">Counterattack!</button>
-          </form>
+          <a href="{% url 'game:counterattack' item.game.id %}">Counterattack!</a>
         {% elif item.status == "finished" %}
+          {{item.user_result }}
           {% if item.user_result == "DRAW" %}
             Draw
           {% elif item.user_result == "WIN" %}

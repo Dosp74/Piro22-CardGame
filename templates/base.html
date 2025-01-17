@@ -6,9 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pirogrammer Card Game</title>
-    {% comment %}
     <link rel="stylesheet" href="{% static 'styles/main.css' %}" />
-    {% endcomment %}
   </head>
   <body>
     <header>
@@ -18,8 +16,8 @@
       <div class="header-right">
         <nav>
           <ul>
-            <li><a href="#">nav1</a></li>
-            <li><a href="#">nav2</a></li>
+            <li><a href="{% url 'game:start_game' %}">게임시작</a></li>
+            <li><a href="{% url 'ranking:ranking' %}">랭킹보기</a></li>
             <li><a href="#">nav3</a></li>
           </ul>
         </nav>
