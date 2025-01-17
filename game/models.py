@@ -58,3 +58,18 @@ class Game(models.Model):
             elif self.result == "DRAW":
                 return "DRAW"
         return "NOT_PARTICIPATING"
+    
+    def update_points(self):
+        if self.result == "ATTACKER_WIN":
+            self.attacker.point += self.attacker_card
+            self.defender.point -= self.defender_card
+        elif self.result == "DEFENDER_WIN":
+            self.defender.point += self.defender_card
+            self.attacker.point -= self.attacker_card
+        elif self.result == "DRAW":
+            # 무승부일 경우 점수 변화 없음
+            return
+
+        # 점수 저장
+        self.attacker.save()
+        self.defender.save()
