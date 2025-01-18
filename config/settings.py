@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'game',
     'ranking',
+    'user',
     'django.contrib.sites',
-
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -63,7 +63,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR/ 'templates'],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -110,7 +110,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
@@ -132,7 +131,7 @@ USE_TZ = True
 
 
 #static
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [ 
     BASE_DIR / 'static',
@@ -164,7 +163,15 @@ SOCIALACCOUNT_PROVIDERS = {
     'kakao': {
         'APP': {
             'client_id': '4bf5f30b50f5422d1e661116c70ee710' ,
-            'key': '',
+            'secret': 'Sbaez4r0PxAdPJB5gQOwj9YDuo4MhoJT',  # 클라이언트 비밀키 추가
         }
     }
 }
+
+KAKAO_REDIRECT_URI = 'http://127.0.0.1:8000/accounts/kakao/login/callback/'
+KAKAO_CLIENT_SECRET = 'Sbaez4r0PxAdPJB5gQOwj9YDuo4MhoJT' # 발급받은 client_secret을 여기에 입력
+KAKAO_CLIENT_ID = '4bf5f30b50f5422d1e661116c70ee710'  # 발급받은 client_id를 여기에 입력
+
+ACCOUNT_ADAPTER = 'user.adapter.CustomSocialAccountAdapter'  # user는 앱 이름
+
+AUTH_USER_MODEL = 'user.User'  # user는 앱 이름

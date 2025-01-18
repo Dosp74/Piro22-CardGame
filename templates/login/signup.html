@@ -1,53 +1,28 @@
-{% comment %} {% load static %} {% endcomment %} {% load socialaccount %}
+{% load static %}
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'styles/login.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans+KR&family=Jersey+15&family=Sunflower:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <title>signup</title>
   </head>
-<body>
-<div>
-  <h1>그냥 회원가입</h1>
-  <form method="post">
-    {% csrf_token %}
-    <p>
-      <label for="{{ form.username.id_for_label}}">아이디:</label>
-      {{ form.username }} {% if form.username.errors %}
-      <span class="error">{{ form.username.errors }}</span>
-      {% endif %}
-    </p>
 
+  <body>
+    <div class="login_text">회원가입</div>
+    {% comment %} {% load static %} {% endcomment %} {% load socialaccount %}
 
-
-
-
-
-
-
-
-
-
-
-
-</div>
-
-<div>
-  <h1>카카오로 회원가입</h1>
-  <button type="button" onclick="location.href = '{% provider_login_url 'kakao' %}'">
-    <img class="kakao" src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" alt="" />
-  </button>
-</div>
-</body>
+    <div class="kakao_login">
+      <button type="button" onclick="location.href = '{% provider_login_url 'kakao' %}'">
+        <img class="kakao" src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" alt="" />
+      </button>
+    </div>
+  </body>
 </html>
-
-{% comment %} 아이디
-비밀번호
-비밀번호 확인
-이름
-전화번호
-이메일 주소
-
-가입하기 가입취소(url 'login')
-
-
-
-마이페이지, 로그아웃 페이지 {% endcomment %}

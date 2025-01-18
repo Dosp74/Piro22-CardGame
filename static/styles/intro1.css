@@ -1,0 +1,130 @@
+:root {
+  --main-font: "Chakra Petch", sans-serif; /* 영어 */
+  --secondary-font: "IBM Plex Sans KR", Arial, sans-serif; /* 한국어 */
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+button {
+  all: unset;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+body {
+  font-family: var(--main-font);
+  background-image: url("../img/background_img.png");
+  background-size: cover;
+  background-position: center -135px;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header_right {
+  font-family: var(--secondary-font);
+}
+
+.header {
+  border-bottom: 2px solid;
+  border-bottom-color: gray;
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  color: white;
+}
+
+.header_left {
+  font-size: 30px;
+  margin-left: 40px;
+  padding: 10px;
+}
+
+.header_left > a {
+  color: white;
+}
+
+.header_right {
+  display: flex;
+  flex-direction: row;
+  font-size: 20px;
+}
+
+.header_login,
+.header_signup {
+  margin-right: 50px;
+}
+
+.header_login > a,
+.header_signup > a {
+  color: white;
+}
+
+.mini {
+  font-size: 22px;
+  color: #b9d8eb;
+}
+
+footer {
+  color: white;
+  text-align: center;
+  padding-bottom: 5px;
+  position: fixed;
+  bottom: 0;
+  right: 5px;
+  width: auto;
+  font-size: 16px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 100px - 50px);
+}
+
+.body_box {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  width: 450px;
+  background-color: rgb(255, 255, 255, 0.6);
+
+  border: 2px solid;
+  border-radius: 10px;
+}
+
+.main_title > span {
+  display: flex;
+  padding: 20px;
+
+  font-size: 70px;
+  font-weight: bolder;
+}
+
+.main_start {
+  font-size: 30px;
+  font-weight: bold;
+  padding-bottom: 20px;
+}

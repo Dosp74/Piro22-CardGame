@@ -1,34 +1,44 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Piro Game</title>
-</head>
-<body>
-    <header>
-        <h1>Pirogrammer Card Game</h1>
-        <nav>
-            <a href="{% url 'users:login' %}">로그인</a>
-            <a href="{% url 'users:signup' %}">회원가입</a>
-        </nav>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static './styles/intro1.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans+KR&family=Jersey+15&family=Sunflower:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <title>Intro1</title>
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="header_left"><a href="{% url 'user:intro1' %}">Pirogrammer Card Game</a><span class="mini">(Team01)</span></div>
+      <div class="header_right">
+        <div class="header_login"><a href="{% url 'user:login' %}">로그인</a></div>
+        <div class="header_signup"> <a href="{% url 'user:signup' %}">회원가입</a></div>
+      </div>
     </header>
 
     <main class="container">
+      <div class="body_box">
         <div class="main_title">
-            <p>Piro Game</p>
+          <span>Piro Game</span>
         </div>
-        <form method="GET" action="{% url 'games:start' %}">
-            <button 
-                aria-label="게임 시작"
-                {% if not user.is_authenticated %}disabled{% endif %}>
-                start
-            </button>
-        </form>
+        <div class="main_start">
+
+        <form method="GET" action="{% url 'game:start_game' %}">
+          <button aria-label="게임 시작" {% if not user.is_authenticated %}disabled{% endif %}>start</button>
+        </div>
+      </form>
+      </div>
     </main>
 
     <footer>
-        <p>피로그래밍 22기 카드게임 세션 1조</p>
+      <span class="footer">&copy; 2025 Pirogrammer Card Game. All rights reserved.</span>
     </footer>
-</body>
+  </body>
 </html>
