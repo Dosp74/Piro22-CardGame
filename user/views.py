@@ -64,22 +64,18 @@ def kakao_callback(request):
     user, created = User.objects.get_or_create(username=nickname)
     user.first_name = nickname
     user.profile_image = profile_image
-    user.save()
+    if created:
+        user.first_name = nickname
+        user.profile_image = profile_image
+        user.save()
+    else:
+        user.save()
 
     user.backend = 'allauth.account.auth_backends.AuthenticationBackend'
     login(request, user)
 
     # 6. 성공 시 리디렉트
     return redirect(reverse('user:intro2'))
-
-# def kakao_login(request):
-#     # 카카오 로그인 URL 생성
-#     client_id = settings.KAKAO_CLIENT_ID
-#     redirect_uri = settings.KAKAO_REDIRECT_URI
-#     kakao_auth_url = f"https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code"
-
-#     # 카카오 로그인 페이지로 리디렉션
-#     return redirect(kakao_auth_url)
 
 def kakao_login(request):
     client_id = settings.KAKAO_CLIENT_ID
