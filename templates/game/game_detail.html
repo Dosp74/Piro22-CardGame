@@ -1,7 +1,5 @@
 {% extends 'base.html' %} {% block content %}
-<h1>
-  {{ game.id }} - {{ game.attacker.username }}VS{{ game.defender.username }}
-</h1>
+<h1>{{ game.id }} - {{ game.attacker.username }}VS{{ game.defender.username }}</h1>
 
 {% if status == 'waiting' %}
 <p>진행중...</p>
@@ -34,5 +32,4 @@
   {% csrf_token %}
   <button type="submit">전적목록</button>
 </form>
-{% endif %}
-{% endblock %}
+{% endif %} {% endblock %}

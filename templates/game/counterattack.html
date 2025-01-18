@@ -1,17 +1,13 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% load static %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'styles/counterattack.css' %}" />
+{% endblock %} {% block content %}
 
 <form method="post">
   {% csrf_token %}
   <h2>반격할 카드:</h2>
   <div>
     {% for card in cards %}
-    <input
-      type="radio"
-      id="card{{ card }}"
-      name="selected_card"
-      value="{{ card }}"
-      required
-    />
+    <input type="radio" id="card{{ card }}" name="selected_card" value="{{ card }}" required />
     <label for="card{{ card }}">{{ card }}</label><br />
     {% endfor %}
   </div>
