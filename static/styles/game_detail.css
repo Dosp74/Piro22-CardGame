@@ -39,6 +39,9 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.container {
+  flex-direction: column;
+}
 /* 게임 결과 영역 스타일 */
 h4 {
   font-size: 20px;
