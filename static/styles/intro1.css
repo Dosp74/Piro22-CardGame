@@ -68,13 +68,11 @@ body {
   font-size: 20px;
 }
 
-.header_login,
-.header_signup {
+.header_login, .header_signup {
   margin-right: 50px;
 }
 
-.header_login > a,
-.header_signup > a {
+.header_login > a, .header_signup > a {
   color: white;
 }
 
@@ -104,13 +102,10 @@ footer {
 .body_box {
   display: flex;
   flex-direction: column;
-
   justify-content: center;
   align-items: center;
-
   width: 450px;
   background-color: rgb(255, 255, 255, 0.6);
-
   border: 2px solid;
   border-radius: 10px;
 }
@@ -118,7 +113,6 @@ footer {
 .main_title > span {
   display: flex;
   padding: 20px;
-
   font-size: 70px;
   font-weight: bolder;
 }

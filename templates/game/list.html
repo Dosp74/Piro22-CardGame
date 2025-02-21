@@ -1,6 +1,11 @@
-{% extends 'base.html' %} {% load static %} {% block extra_css %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
 <link rel="stylesheet" href="{% static 'styles/list.css' %}" />
-{% endblock %} {% block content %}
+{% endblock %}
+
+{% block content %}
 
 <div class="game_list_all">
   <div class="game-list-header">
@@ -45,4 +50,5 @@
     </table>
   </div>
 </div>
+
 {% endblock %}

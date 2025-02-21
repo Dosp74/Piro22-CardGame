@@ -5,7 +5,6 @@ from django.http import HttpResponseBadRequest, HttpResponseNotAllowed
 from user.models import User  # User 모델 가져오기
 from game.models import Game  # Game 모델 가져오기
 
-
 def start_game(request):
     def generate_random_cards():
         # 1~10 중 5개의 랜덤한 숫자를 반환
@@ -48,8 +47,6 @@ def start_game(request):
     # 잘못된 HTTP 메서드 처리
     return HttpResponseNotAllowed(["GET", "POST"])
 
-
-
 @login_required
 def game_detail(request, game_id):
     game = get_object_or_404(Game, id=game_id)
@@ -91,7 +88,7 @@ def game_detail(request, game_id):
 @login_required
 def cancel_game(request, game_id):
     game = get_object_or_404(Game, id=game_id)
-    
+
     # 게임을 취소할 수 있는 상태인지 확인
     if request.user == game.attacker and game.defender_card is None:
         game.delete()
@@ -150,10 +147,10 @@ def counterattack(request, game_id):
 
     print("Invalid HTTP method. Only GET and POST are allowed.")
     return redirect('game:game_detail', game_id=game_id)
-    
+
 def update_point(request, game_id):
     game = get_object_or_404(Game, id=game_id)
-    
+
     if game.result == "ATTACKER_WIN":
         game.attacker.point += game.attacker_card
         game.defender.point -= game.attacker_card
@@ -162,15 +159,8 @@ def update_point(request, game_id):
         game.attacker.point -= game.defender_card
     game.attacker.save()
     game.defender.save()
-    
+
     return redirect('game:game_detail', game_id=game_id)
-
-from django.shortcuts import render
-from .models import Game
-
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-from .models import Game
 
 @login_required
 def list_view(request):

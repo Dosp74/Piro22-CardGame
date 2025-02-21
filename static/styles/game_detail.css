@@ -42,6 +42,7 @@ button:disabled {
 .container {
   flex-direction: column;
 }
+
 /* 게임 결과 영역 스타일 */
 h4 {
   font-size: 20px;
@@ -52,8 +53,7 @@ h4 {
 }
 
 /* 결과 세부 정보 (카드 및 점수) */
-p:nth-of-type(2),
-p:nth-of-type(3) {
+p:nth-of-type(2), p:nth-of-type(3) {
   font-size: 16px;
   font-weight: bold;
   color: #333;

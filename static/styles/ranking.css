@@ -1,270 +1,258 @@
 :root {
-    --main-font: "Chakra Petch", sans-serif; /* 영어 */
-    --secondary-font: "IBM Plex Sans KR", Arial, sans-serif; /* 한국어 */
+  --main-font: "Chakra Petch", sans-serif; /* 영어 */
+  --secondary-font: "IBM Plex Sans KR", Arial, sans-serif; /* 한국어 */
 }
 
 a {
-text-decoration: none;
-color: black;
+  text-decoration: none;
+  color: black;
 }
 
 a:hover {
-text-decoration: none;
-color: black;
+  text-decoration: none;
+  color: black;
 }
 
 button {
-all: unset;
-background: none;
-border: none;
-color: inherit;
-font: inherit;
-cursor: pointer;
+  all: unset;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
 }
 
 body {
-    font-family: var(--main-font);
-    background-image: url("../img/background_img.png");
-    background-size: cover;
-    background-position: center -135px;
-    background-repeat: no-repeat;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
+  font-family: var(--main-font);
+  background-image: url("../img/background_img.png");
+  background-size: cover;
+  background-position: center -135px;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .ranking {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .ranking h2 {
-    font-family: var(--secondary-font);
-    font-size: 60px;
-    text-align: center;
+  font-family: var(--secondary-font);
+  font-size: 60px;
+  text-align: center;
 }
 
 .ranking h3 {
-    font-family: var(--secondary-font);
-    font-size: 30px;
-    text-align: center;
-    margin: 0;
+  font-family: var(--secondary-font);
+  font-size: 30px;
+  text-align: center;
+  margin: 0;
 }
 
 .ranking button {
-    font-family: var(--secondary-font);
-    font-size: 20px;
-    text-align: center;
-    padding: 10px;
-    border-radius: 10px;
-    border: 2px solid black;
-    background-color: rgb(188, 198, 245);
-    margin: 0;
+  font-family: var(--secondary-font);
+  font-size: 20px;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid black;
+  background-color: rgb(188, 198, 245);
+  margin: 0;
 }
 
 .ranking button:hover {
-    background-color: rgb(27, 72, 209);
-    color: white;
-    cursor: pointer;
+  background-color: rgb(27, 72, 209);
+  color: white;
+  cursor: pointer;
 }
 
 .ranking_container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 70%;
-    height: 75%;
-    padding: auto;
-    padding-top: 0px;
-    margin: auto;
-    margin-top: 30px;
-    background-color: rgb(255, 255, 255, 0.6);
-    border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+  height: 75%;
+  padding: auto;
+  padding-top: 0px;
+  margin: auto;
+  margin-top: 30px;
+  background-color: rgb(255, 255, 255, 0.6);
+  border-radius: 10px;
 }
 
 .ranking_list {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end; /* 하단 정렬 */
-    width: 60%;
-    height: 400px;
-    margin: 0 auto;
-    margin-bottom: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end; /* 하단 정렬 */
+  width: 60%;
+  height: 400px;
+  margin: 0 auto;
+  margin-bottom: 30px;
 }
 
 .ranking_user {
-    display: flex;
-    flex-direction: column; /* 수직 정렬 */
-    align-items: center; /* 수평 가운데 정렬 */
-    text-align: center;
-    height: 100%; /* 부모 높이 */
-    width: 100%;
-    justify-content: flex-end;
+  display: flex;
+  flex-direction: column; /* 수직 정렬 */
+  align-items: center; /* 수평 가운데 정렬 */
+  text-align: center;
+  height: 100%; /* 부모 높이 */
+  width: 100%;
+  justify-content: flex-end;
 }
 
 .ranking_user > div {
-    width: 100%;
-    height: 70%;
-    border-radius: 10px;
+  width: 100%;
+  height: 70%;
+  border-radius: 10px;
 }
 
 .ranking_user:nth-child(1) .bar::before {
-    content: '1';
-    display: block;
-    text-align: center;
-    padding-top: 80%;
-    color: white;
-    font-size: 40px;
+  content: '1';
+  display: block;
+  text-align: center;
+  padding-top: 80%;
+  color: white;
+  font-size: 40px;
 }
 
 .ranking_user:nth-child(1) .bar {
-    content: '1';
-    height: 70%; /* 첫 번째 사용자 */
-    background-color: rgb(72, 78, 245);
+  content: '1';
+  height: 70%; /* 첫 번째 사용자 */
+  background-color: rgb(72, 78, 245);
 }
 
 .ranking_user:nth-child(2) .bar::before {
-    content: '2';
-    display: block;
-    text-align: center;
-    color: white;
-    font-size: 40px;
-    padding-top: 50%;
+  content: '2';
+  display: block;
+  text-align: center;
+  color: white;
+  font-size: 40px;
+  padding-top: 50%;
 }
 .ranking_user:nth-child(2) .bar {
-    content: '2';
-    height: 50%; /* 두 번째 사용자 */
-    background-color: rgb(142, 158, 252);
+  content: '2';
+  height: 50%; /* 두 번째 사용자 */
+  background-color: rgb(142, 158, 252);
 }
 
 .ranking_user:nth-child(3) .bar::before {
-    content: '3';
-    display: block;
-    text-align: center;
-    color: white;
-    font-size: 40px;
-    padding-top: 20%;
+  content: '3';
+  display: block;
+  text-align: center;
+  color: white;
+  font-size: 40px;
+  padding-top: 20%;
 }
 
 .ranking_user:nth-child(3) .bar {
-    content: '3';
-    height: 30%; /* 세 번째 사용자 */
-    background-color: rgb(191, 203, 255);
+  content: '3';
+  height: 30%; /* 세 번째 사용자 */
+  background-color: rgb(191, 203, 255);
 }
 
 form > button {
-    width: 100px;
-    height: 30px;
-    margin: 0 47%;
+  width: 100px;
+  height: 30px;
+  margin: 0 47%;
 }
 
-.header-right,
-.main_comment {
-font-family: var(--secondary-font);
+.header-right, .main_comment {
+  font-family: var(--secondary-font);
 }
 
 .header {
-border-bottom: 2px solid;
-border-bottom-color: gray;
-background-color: black;
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-align-items: center;
-position: relative;
-z-index: 1;
-color: white;
+  border-bottom: 2px solid;
+  border-bottom-color: gray;
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  color: white;
 }
 
 .header-left {
-font-size: 30px;
-margin-left: 40px;
-padding: 10px;
+  font-size: 30px;
+  margin-left: 40px;
+  padding: 10px;
 }
 
 .header-left > a {
-color: white;
+  color: white;
 }
 
 .header-right {
-display: flex;
-flex-direction: row;
-font-size: 20px;
+  display: flex;
+  flex-direction: row;
+  font-size: 20px;
 }
 
-.header_login,
-.header_signup,
-.header_logout {
-margin-right: 50px;
+.header_login, .header_signup, .header_logout {
+  margin-right: 50px;
 }
 
-.header_login > a,
-.header_signup > a,
-.header_logout > a {
-color: white;
+.header_login > a, .header_signup > a, .header_logout > a {
+  color: white;
 }
 
 .mini {
-font-size: 22px;
-color: #b9d8eb;
+  font-size: 22px;
+  color: #b9d8eb;
 }
 
 footer {
-color: white;
-text-align: center;
-padding-bottom: 5px;
-position: fixed;
-bottom: 0;
-right: 5px;
-width: auto;
-font-size: 16px;
+  color: white;
+  text-align: center;
+  padding-bottom: 5px;
+  position: fixed;
+  bottom: 0;
+  right: 5px;
+  width: auto;
+  font-size: 16px;
 }
 
 .body_box {
-display: flex;
-flex-direction: column;
-
-justify-content: center;
-align-items: center;
-
-width: 450px;
-background-color: rgb(255, 255, 255, 0.6);
-
-border: 2px solid;
-border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 450px;
+  background-color: rgb(255, 255, 255, 0.6);
+  border: 2px solid;
+  border-radius: 10px;
 }
 
 .main_title > span {
-display: flex;
-padding: 20px;
-
-font-size: 70px;
-font-weight: bolder;
+  display: flex;
+  padding: 20px;
+  font-size: 70px;
+  font-weight: bolder;
 }
 
 .main_comment {
-padding-top: 30px;
-font-size: 18px;
+  padding-top: 30px;
+  font-size: 18px;
 }
 
 .bold {
-font-weight: bold;
+  font-weight: bold;
 }
 
-.main_start,
-.main_list {
-font-size: 30px;
-font-weight: bold;
-
-margin-left: 10px;
-margin-right: 10px;
+.main_start, .main_list {
+  font-size: 30px;
+  font-weight: bold;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .main_button {
-display: flex;
-flex-direction: row;
-padding-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 20px;
 }
-  

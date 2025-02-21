@@ -1,13 +1,11 @@
 import requests
 from django.shortcuts import render, redirect
 from django.conf import settings
-from allauth.socialaccount.models import SocialAccount
 from django.urls import reverse  # reverse 함수 가져오기
 from .utils import get_kakao_access_token, get_kakao_user_info  # utils에서 함수 가져오기
 from user.models import User
 from django.contrib.auth import get_user_model
 from django.contrib.auth import login, logout
-
 
 User = get_user_model()
 
@@ -35,8 +33,6 @@ def login_view(request):
 
 def user_list(request):
     return render(request, 'main/list.html')
-
-User = get_user_model()
 
 def kakao_callback(request):
     """카카오 로그인 콜백 처리"""
@@ -94,7 +90,7 @@ def kakao_logout(access_token):
     else:
         print(f"Failed to logout: {response.json()}")
         return None
-    
+
 def user_logout(request):
     # 1. Django에서 사용자 로그아웃
     logout(request)

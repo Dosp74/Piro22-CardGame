@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block content %}
+
     <main class="ranking">
         <h2>Piro 명예의 전당</h2>
         <hr/>
@@ -18,14 +19,13 @@
                         <div class="bar"></div>
                     </div>
                 {% endfor %}
-            </div>
+                    </div>
             <form method="post" action="{% url 'game:list_view' %}">
                 {% csrf_token %}
                 <button type="submit">전적목록</button>
             </form>   
-        </div>
-            
+            </div>
         </div> 
-        </main>
+    </main>
 
 {% endblock %}

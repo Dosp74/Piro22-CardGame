@@ -35,8 +35,7 @@ body {
   flex-direction: column;
 }
 
-.header-right,
-.main_comment {
+.header-right, .main_comment {
   font-family: var(--secondary-font);
 }
 
@@ -69,15 +68,11 @@ body {
   font-size: 20px;
 }
 
-.header_login,
-.header_signup,
-.header_logout {
+.header_login, .header_signup, .header_logout {
   margin-right: 50px;
 }
 
-.header_login > a,
-.header_signup > a,
-.header_logout > a {
+.header_login > a, .header_signup > a, .header_logout > a {
   color: white;
 }
 
@@ -107,13 +102,10 @@ footer {
 .body_box {
   display: flex;
   flex-direction: column;
-
   justify-content: center;
   align-items: center;
-
   width: 450px;
   background-color: rgb(255, 255, 255, 0.6);
-
   border: 2px solid;
   border-radius: 10px;
 }
@@ -121,7 +113,6 @@ footer {
 .main_title > span {
   display: flex;
   padding: 20px;
-
   font-size: 70px;
   font-weight: bolder;
 }
@@ -135,11 +126,9 @@ footer {
   font-weight: bold;
 }
 
-.main_start,
-.main_list {
+.main_start, .main_list {
   font-size: 30px;
   font-weight: bold;
-
   margin-left: 10px;
   margin-right: 10px;
 }
