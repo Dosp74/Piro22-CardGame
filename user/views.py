@@ -1,11 +1,13 @@
 import requests
 from django.shortcuts import render, redirect
 from django.conf import settings
-from django.urls import reverse  # reverse 함수 가져오기
-from .utils import get_kakao_access_token, get_kakao_user_info  # utils에서 함수 가져오기
+from django.urls import reverse
+from .utils import get_kakao_access_token, get_kakao_user_info
 from user.models import User
-from django.contrib.auth import get_user_model
-from django.contrib.auth import login, logout
+from user.forms import SignupForm, LoginForm
+from django.contrib.auth import get_user_model, login
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import auth
 
 User = get_user_model()
 
@@ -26,10 +28,34 @@ def intro2_view(request):
     return render(request, 'login/intro2.html', context)
 
 def signup_view(request):
-    return render(request, 'login/signup.html')
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.backend = 'django.contrib.auth.backends.ModelBackend'
+            login(request, user)
+            return redirect('user:intro2')
+        else:
+            return render(request, 'login/signup.html', {'form': form})
+    else:
+        form = SignupForm()
+        context = {
+            'form': form,
+        }
+        return render(request, 'login/signup.html', context)
 
 def login_view(request):
-    return render(request, 'login/login.html')
+    if request.method == 'POST':
+        form = LoginForm(request, request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+
+            return redirect('user:intro2')
+    else:
+        form = LoginForm()
+
+    return render(request, 'login/login.html', {'form': form})
 
 def user_list(request):
     return render(request, 'main/list.html')
@@ -93,7 +119,7 @@ def kakao_logout(access_token):
 
 def user_logout(request):
     # 1. Django에서 사용자 로그아웃
-    logout(request)
+    auth.logout(request)
 
     # 2. 카카오 로그아웃 API 호출 (옵션)
     access_token = request.session.get('kakao_access_token')
@@ -102,4 +128,4 @@ def user_logout(request):
         request.session.pop('kakao_access_token', None)
 
     # 3. 홈 또는 로그인 페이지로 리디렉트
-    return redirect(reverse('user:login'))
+    return redirect(reverse('user:intro1'))

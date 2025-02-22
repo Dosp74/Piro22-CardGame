@@ -3,25 +3,6 @@
   --secondary-font: "IBM Plex Sans KR", Arial, sans-serif; /* 한국어 */
 }
 
-a {
-  text-decoration: none;
-  color: black;
-}
-
-a:hover {
-  text-decoration: none;
-  color: black;
-}
-
-button {
-  all: unset;
-  background: none;
-  border: none;
-  color: inherit;
-  font: inherit;
-  cursor: pointer;
-}
-
 body {
   font-family: var(--main-font);
   background-image: url("../img/background_img.png");
@@ -37,7 +18,7 @@ body {
   justify-content: center;
 }
 
-.login-container {
+.signup-container {
   background: rgba(255, 255, 255, 0.9);
   width: 350px;
   text-align: center;
@@ -50,14 +31,14 @@ body {
   gap: 20px;
 }
 
-.login_text {
+.signup-text {
   font-size: 50px;
   font-weight: bolder;
   font-family: var(--secondary-font);
   padding-bottom: 30px;
 }
 
-.login-form {
+.signup-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -79,10 +60,10 @@ input {
   font-family: var(--secondary-font);
 }
 
-.login-btn {
+.signup-btn {
   width: 100%;
   padding: 12px;
-  background-color: #007bff;
+  background-color: #28a745;
   color: white;
   border: none;
   border-radius: 8px;
@@ -92,24 +73,6 @@ input {
   transition: 0.3s;
 }
 
-.login-btn:hover {
-  background-color: #0056b3;
-}
-
-.kakao_login {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-}
-
-.kakao_login img {
-  width: 200px;
-  height: 50px;
-  border-radius: 8px;
-  transition: 0.3s;
-}
-
-.kakao_login img:hover {
-  transform: scale(1.05);
+.signup-btn:hover {
+  background-color: #218838;
 }

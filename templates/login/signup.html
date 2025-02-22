@@ -6,23 +6,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'styles/login.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/signup.css' %}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans+KR&family=Jersey+15&family=Sunflower:wght@300&display=swap"
       rel="stylesheet"
     />
-    <title>signup</title>
+    <title>Signup</title>
   </head>
 
   <body>
-    <div class="login_text">회원가입</div>
-
-    <div class="kakao_login">
-      <button type="button" onclick="location.href = '{% provider_login_url 'kakao' %}'">
-        <img class="kakao" src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" alt="" />
-      </button>
+    <div class="signup-container">
+      <div class="signup-text">Signup</div>
+      <form method="POST" action="" class="signup-form">
+        {% csrf_token %}
+        <div class="input-group">
+          {{ form.username }}
+        </div>
+        <div class="input-group">
+          {{ form.password1 }}
+        </div>
+        <div class="input-group">
+          {{ form.password2 }}
+        </div>
+        <button type="submit" class="signup-btn">가입하기</button>
+      </form>
     </div>
   </body>
 </html>

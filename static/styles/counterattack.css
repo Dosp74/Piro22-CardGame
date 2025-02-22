@@ -1,5 +1,8 @@
 /* 전체 폼 스타일 */
 form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 80%;
   max-width: 500px;
   margin: 0 auto;
@@ -43,19 +46,19 @@ input[type="radio"]:checked + label {
 }
 
 /* 버튼 스타일 */
-button {
+.CounterAttack-btn {
   width: 100%;
+  max-width: 200px;
   padding: 12px;
   background-color: #007bff;
   color: white;
-  font-size: 18px;
   font-weight: bold;
-  border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  text-align: center;
 }
 
-button:hover {
+.CounterAttack-btn:hover {
   background-color: #0056b3;
 }
