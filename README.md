@@ -95,13 +95,8 @@
 ## 🛠 기술 스택
 - **Frontend**: HTML, CSS
 - **Backend**: Python, Django
-- **Database**: SQLite3
+- **Database**: SQLite
 - **Authentication**: Django Allauth (소셜 로그인 포함)
-
-## 🚀 추가 기능 및 확장 가능성
-- **게임 룰 커스터마이징** (예: 특정 숫자 범위, 카드 개수 변경 등)
-- **아이템 시스템** (점수를 사용하여 특수 아이템 구매 및 사용)
-- **친구 시스템** (지인과 게임 신청 및 대결 가능)
 
 ## 📢 프로젝트 정보
 - **피로그래밍 22기 4주차 팀 과제**
